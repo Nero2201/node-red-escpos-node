@@ -1,0 +1,22 @@
+{
+  "name": "@nero2201/node-red-escpos-node",
+  "version": "0.1.0",
+  "description": "A node for communicating with compatible ESC/POS receipt printers over a network.",
+  "repository": {
+    "type": "git",
+    "url": "yes"
+  },
+  "keywords": [
+    "escpos",
+    "node-red",
+    "printer",
+    "receipt"
+  ],
+  "author": "Benjamin Kasser",
+  "license": "MIT",
+  "node-red" : {
+        "nodes": {
+            "node-red-escpos": "node-red-escpos.js"
+        }
+    }
+}

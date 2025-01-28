@@ -1,0 +1,95 @@
+<script type="text/javascript">
+    RED.nodes.registerType('EscPos-Printer', {
+        category: 'output',
+        color: '#9B8FA5',
+        defaults: {
+            name: { value: "" },
+            ip: { value: "", required: true },
+            port: { value: 9100, validate: RED.validators.number(), required: true },
+            text: { value: ""},
+            fontType: { value: "A" },
+            width: { value: 1, validate: RED.validators.number(), required: true },
+            height: { value: 1, validate: RED.validators.number(), required: true },
+            alignment: { value: "left" },
+            bold: { value: false },
+            invert: { value: false },
+            smooth: { value: false },
+            cutAfterPrint: { value: false }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "font-awesome/fa-print",
+        label: function () {
+            return this.name || "EscPos Printer";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="EscPos-Printer">
+    <div style="display: flex; flex-direction: column; gap: 6px; max-width: 450px;">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" style="width:100%;">
+
+        <div style="display: flex; gap: 6px;">
+            <div style="flex: 1;">
+                <label for="node-input-ip"><i class="fa fa-globe"></i> Printer IP</label>
+                <input type="text" id="node-input-ip" placeholder="IP-Adress" style="width:100%;">
+            </div>
+            <div style="flex: 0.5;">
+                <label for="node-input-port"><i class="fa fa-plug"></i> Port</label>
+                <input type="number" id="node-input-port" placeholder="9100" style="width:100%;">
+            </div>
+        </div>
+
+        <label for="node-input-text"><i class="fa fa-file-text-o"></i> Text</label>
+        <textarea id="node-input-text" rows="3" style="width:100%;" placeholder="Text to print"></textarea>
+
+        <div style="display: flex; gap: 6px;">
+            <div style="flex: 0.7;">
+                <label for="node-input-fontType"><i class="fa fa-font"></i> Font</label>
+                <select id="node-input-fontType" style="width:100%;">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                </select>
+            </div>
+            <div style="flex: 0.5;">
+                <label for="node-input-width"><i class="fa fa-text-height"></i> Width</label>
+                <input type="number" id="node-input-width" min="1" max="8" style="width:100%;">
+            </div>
+            <div style="flex: 0.5;">
+                <label for="node-input-height"><i class="fa fa-text-height"></i> Height</label>
+                <input type="number" id="node-input-height" min="1" max="8"style="width:100%;">
+            </div>
+            <div style="flex: 1;">
+                <label for="node-input-alignment"><i class="fa fa-align-center"></i> Align</label>
+                <select id="node-input-alignment" style="width:100%;">
+                    <option value="left">Left</option>
+                    <option value="center">Center</option>
+                    <option value="right">Right</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
+            <label><input type="checkbox" id="node-input-bold"> <b>Bold</b></label>
+            <label><input type="checkbox" id="node-input-invert"> <span style="color: white; background-color: black;">Invert</span></label>
+            <label><input type="checkbox" id="node-input-smooth"> Smooth</label>
+            <label><input type="checkbox" id="node-input-cutAfterPrint"> ✂ Cut after print</label>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/html" data-help-name="EscPos-Printer">
+    <p>A Node-RED node for sending text to an ESC/POS printer over a network.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">string</span></dt>
+        <dd>The text to print (if the text field is empty).</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">string</span></dt>
+        <dd>Returns a confirmation message when printing is done.</dd>
+    </dl>
+</script>
